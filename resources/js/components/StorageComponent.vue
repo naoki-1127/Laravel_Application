@@ -31,13 +31,15 @@
         </div> -->
         <div class ="card">
             <div class="card-header">Box FOLDER</div>
-            <ul id="accordion_menu" v-for="(folder_names,index) in folders" :key="index" class="storage_list">
-                <li>
-                    <a data-toggle="collapse" href="#menu01" aria-controls="#menu01" aria-expanded="false" class="link_color"><font-awesome-icon icon='folder' class="folder"/>{{ folder_names.folder_name }} </a>
-                </li>
-                <ul id="menu01" class="collapse" data-parent="#accordion_menu"  v-for="(folder_name,index) in folder_names.file" :key="index">
-                    <li @click="getPreview(folder_name)"><a href="#">{{ folder_name.file_name }}</a></li>
-                </ul>
+            <ul v-for="(folder_names,index) in folders" :key="index" class="storage_list">
+                <div @click="toggleShowPost(index)" class="cursor">
+                    <font-awesome-icon icon='folder' class="folder"/>{{ folder_names.folder_name }}
+                </div>
+                <div v-if="show[index]">
+                    <ul v-for="(folder_name,index) in folder_names.file" :key="index" class="link_color">
+                        <li class="link_color" @click="getPreview(folder_name)"><a href="#" class="link_color">{{ folder_name.file_name }}</a></li>
+                    </ul>
+                </div>
             </ul>
         </div>
     </div>
@@ -57,6 +59,9 @@
 }
 .folder{
     color: gold;
+}
+.cursor{
+    cursor: pointer;
 }
 .storage_list{
     list-style: none;
@@ -123,7 +128,10 @@ ul,li{
         data: function() {
             return{
                 url_edit_id: 'https://localhost/sample_app/public/box/redirect',
-                folder_id: null
+                folder_id: null,
+                menu_name: "#menu",
+                show: {},
+                folder_index: null
             }
         },
         methods: {
@@ -141,7 +149,11 @@ ul,li{
                 .catch(function(error) {
                     // error 処理
                     console.log(error)
-                });
+                })
+            },
+            toggleShowPost(key){
+                this.$set(this.show, key, !this.show[key])
+                console.log(this.show[key]);
             }
         }
     }
