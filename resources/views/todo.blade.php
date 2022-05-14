@@ -1,4 +1,4 @@
 @extends('layouts.user')
 @section('content')
-    <app></app>
+<todo-component></todo-component>
 @endsection

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Study</h1>
+            <h1 class="h2">Dictionary</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group mr-2">
                     <button type="button" class="btn btn-outline-secondary">Share</button>
@@ -14,9 +14,24 @@
             </div>
         </div>
         <div>
-            <div class="drop_area" @dragenter="dragEnter" @dragleave="dragLeave" @dragover.prevent @drop.prevent="dropFile" :class="{enter: isEnter}">
-                ファイルアップロード
+            <div>
+                <!-- <list @test="getkey"/> -->
+                <list/>
             </div>
+            <!-- <div>
+                <div v-if="key==='0'">
+                    <php-index/>
+                </div>
+                <div v-if="key==='1'">
+                    <go-index/>
+                </div>
+                <div v-if="key==='2'">
+                    <vuejs-index/>
+                </div>
+                <div v-if="key==='3'">
+                    <git-index/>
+                </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -48,41 +63,23 @@
 </style>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        },
-        data: function() {
-            return{
-                isEnter: false,
-                files: []
-            }
-        },
-        methods: {
-            dragEnter() {
-                this.isEnter = true;
-                console.log('Enter Drop Area');
-            },
-            dragLeave() {
-            this.isEnter = false;
-            },
-            dragOver() {
-                console.log('DragOver')
-            },
-            dropFile() {
-                console.log(event.dataTransfer.files)
-                this.isEnter = false;
-                this.files = [...event.dataTransfer.files]
-                this.files.forEach(file => {
-                    let form = new FormData()
-                    form.append('file', file)
-                    axios.post('api/uploadtobox', form).then(response => {
-                        console.log(response.data)
-                    }).catch(error => {
-                        console.log(error)
-                    })
-                })
-            }
+    import list from "../vue/dictionaryindex.vue"
+    /* import phpIndex from "../vue/php_index.vue"
+    import goIndex from "../vue/go_index.vue"
+    import gitIndex from "../vue/git_index.vue"
+    import vuejsIndex from "../vue/vuejs.index.vue" */
+
+export default {
+    components: {
+        list,
+    },
+    methods:{
+        getkey(key){
+            this.key = key,
+            console.log(this.key)
         }
-    }
+    },
+}
+
 </script>
+    

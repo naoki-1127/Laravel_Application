@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('content')
-    <photo-component></photo-component>
+<photo-component></photo-component>
 @endsection
 
 

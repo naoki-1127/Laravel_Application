@@ -69,7 +69,7 @@ Route::prefix('/api')->group(function () {
     Route::post('/getpreview','StorageController@getpreview');
 });
 
-Route::get('/box/redirect','StorageController@boxredirect');
+Route::get('/box/redirect','StorageController@boxredirect')->name('box_redirect');
 Route::get('/callback', 'StorageController@boxcallback');
 
 Route::get('/a', function(){
