@@ -12,12 +12,13 @@ import App from './vue/app'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCalendarWeek, faHeart, faPlusSquare, faTrash,faUpload,faFolder } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faPhp,faGolang,faVuejs, faGit } from '@fortawesome/free-brands-svg-icons'
 
 /* import VueRouter from 'vue-router'; */
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 /* import router from './router'; */
 
-library.add(faPlusSquare, faTrash,faUpload,faCalendarWeek,faHeart,faFolder)
+library.add(faPlusSquare, faTrash,faUpload,faCalendarWeek,faHeart,faFolder,faPhp,faGolang,faVuejs,faGit)
 
 window.Vue = require('vue');
 
@@ -37,10 +38,11 @@ Vue.use(IconsPlugin)
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
 Vue.component('photo-component', require('./components/PhotoComponent.vue').default);
 Vue.component('storage-component',require('./components/StorageComponent.vue').default);
 Vue.component('study-component', require('./components/StudyComponent.vue').default);
+Vue.component('todo-component',require('./components/TodoComponent.vue').default);
 
 
 

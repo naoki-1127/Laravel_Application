@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Stevenmaguire\OAuth2\Client\Provider\Box;
 use GuzzleHttp\Client;
+use App\Utils\BoxUtil;
 
 
 class StorageController extends Controller
@@ -125,7 +126,9 @@ class StorageController extends Controller
                     for($i=0;$i<$responce_data['total_count'];$i++){
                         $file_id[$i]['type']=$json_responceBody->entries[$i]->type;
                         $file_id[$i]['file_id']=$json_responceBody->entries[$i]->id;
-                        $file_id[$i]['file_name']=$json_responceBody->entries[$i]->name;
+                        /* if(strrchr($json_responceBody->entries[$i]->name,'.')==='.jpeg' || strrchr($json_responceBody->entries[$i]->name,'.')==='.png' || strrchr($json_responceBody->entries[$i]->name,'.')==='.JPG'){ */
+                            $file_id[$i]['file_name']=$json_responceBody->entries[$i]->name;
+                        /* } */
                     }
                 }else{
                     for($i=0;$i<100;$i++){
