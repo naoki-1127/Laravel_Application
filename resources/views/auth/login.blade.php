@@ -54,7 +54,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                    {{ __('ログイン') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
@@ -67,7 +67,7 @@
                     </form>
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
-                        <button class="btn btn-success" type= "button" onclick="location.href='<?php $url=env('APP_URL')?>./saml2/trastlogin/login'">
+                        <button class="btn btn-success saml-btn" type= "button" onclick="location.href='<?php $url=env('APP_URL')?>./saml2/trastlogin/login'">
                             SAMLでログイン
                         </button>
                         </div>
@@ -78,3 +78,9 @@
     </div>
 </div>
 @endsection
+
+<style>
+    .saml-btn{
+        margin-top: 10px;
+    }
+</style>

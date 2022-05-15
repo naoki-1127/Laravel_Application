@@ -52,9 +52,10 @@
 </style>
 
 <script>
-    import photolist from "../vue/photolist.vue"
+    import headerItem from "../components/Util/HeaderComponent.vue"
+    import photolist from "../vue/Photo/photolist.vue"
     export default {
-        components: { photolist },
+        components: { photolist,headerItem },
         mounted: function() {
             this.get_photo()
             console.log('Component mounted.')

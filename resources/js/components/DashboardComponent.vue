@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
+        <!-- <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
             <h1 class="h2">Dashboard</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group mr-2">
@@ -12,7 +12,8 @@
                     This week
                 </button>
             </div>
-        </div>
+        </div> -->
+        <header-item :name="name"></header-item>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -166,13 +167,18 @@
 </template>
 
 <script>
+    import headerItem from "../components/Util/HeaderComponent.vue"
     export default {
+        components: {
+            headerItem
+        },
         props: ['users'],
         mounted() {
             console.log('Component mounted.')
         },
         data: function() {
             return{
+                name: "Dashboard"
             }
         },
     }

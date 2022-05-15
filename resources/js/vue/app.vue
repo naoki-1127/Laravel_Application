@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import addItemForm from "./additemform"
-import listView from "./listview"
+import addItemForm from "../vue/Todo/additemform.vue"
+import listView from "../vue/Todo/listview.vue"
 
 export default{
 

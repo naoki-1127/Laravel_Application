@@ -108,7 +108,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href=<?php $url=env('APP_URL')?>./study>
+                <a class="nav-link" href=<?php $url=env('APP_URL')?>./dictionary>
                   <span data-feather="book"></span>
                   Dictionary
                 </a>
@@ -120,7 +120,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href=<?php $url=env('APP_URL')?>./study>
                   <span data-feather="pen-tool"></span>
                   Study
                 </a>

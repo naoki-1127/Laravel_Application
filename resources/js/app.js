@@ -42,6 +42,7 @@ Vue.component('dashboard-component', require('./components/DashboardComponent.vu
 Vue.component('photo-component', require('./components/PhotoComponent.vue').default);
 Vue.component('storage-component',require('./components/StorageComponent.vue').default);
 Vue.component('study-component', require('./components/StudyComponent.vue').default);
+Vue.component('dictionary-component', require('./components/DictionaryComponent.vue').default);
 Vue.component('todo-component',require('./components/TodoComponent.vue').default);
 
 

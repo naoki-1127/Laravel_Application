@@ -1,18 +1,6 @@
 <template>
     <div class="container">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
-        <h1 class="h2">TodoList</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group mr-2">
-                <button type="button" class="btn btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-outline-secondary">Export</button>
-                </div>
-                <button type="button" class="btn btn-outline-secondary dropdown-toggle">
-                <font-awesome-icon icon='calendar-week' />
-                This week
-            </button>
-            </div>
-        </div>
+        <header-item :name="name"></header-item>
         <div class ="todoListContainer"> 
             <div class="heading">
                 <h2 id="title">Todo List</h2>
@@ -29,18 +17,21 @@
 </template>
 
 <script>
-import addItemForm from "../vue/additemform.vue"
-import listView from "../vue/listview.vue"
+import addItemForm from "../vue/Todo/additemform.vue"
+import listView from "../vue/Todo/listview.vue"
+import headerItem from "../components/Util/HeaderComponent.vue"
 
 export default{
 
     components: {
         addItemForm,
-        listView
+        listView,
+        headerItem
     },
     data: function(){
         return{
-            items: []
+            items: [],
+            name: "TodoList"
         }
     },
     methods: {
