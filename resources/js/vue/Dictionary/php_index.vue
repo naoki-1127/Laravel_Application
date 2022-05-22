@@ -4,7 +4,7 @@
             <div class="array_func">
                 <li>配列関数
                     <b-row cols="5">
-                        <b-col v-b-modal.modal-lg>array_push</b-col>
+                        <b-col  class="title" v-b-modal.modal-lg>array_push</b-col>
                         <b-modal id="modal-lg" size="lg" title="array_push">
                             <div class="ex">
                                 (PHP 4, PHP 5, PHP 7, PHP 8)
@@ -27,7 +27,7 @@
                             </div>
                         </b-modal>
 
-                        <b-col v-b-modal.modal-lg2>array_search</b-col>
+                        <b-col  class="title" v-b-modal.modal-lg2>array_search</b-col>
                         <b-modal id="modal-lg2" size="lg" title="array_search">
                             <div class="ex">
                                 (PHP 4 >= 4.0.5, PHP 5, PHP 7, PHP 8)
@@ -39,7 +39,7 @@
                                 <p>$key = array_search('red', $array);   // $key = 1;</p>
                             </div>
                         </b-modal>
-                        <b-col v-b-modal.modal-lg3>array_shift</b-col>
+                        <b-col  class="title" v-b-modal.modal-lg3>array_shift</b-col>
                         <b-modal id="modal-lg3" size="lg" title="array_shift">
                             <div class="ex">
                                 (PHP 4, PHP 5, PHP 7, PHP 8)
@@ -61,7 +61,7 @@
                             </div>
                         </b-modal>
 
-                        <b-col v-b-modal.modal-lg4>array_unshift</b-col>
+                        <b-col  class="title" v-b-modal.modal-lg4>array_unshift</b-col>
                         <b-modal id="modal-lg4" size="lg" title="array_unshift">
                             <div class="ex">
                                 (PHP 4, PHP 5, PHP 7, PHP 8)
@@ -84,7 +84,7 @@
                             </div>
                         </b-modal>
 
-                        <b-col v-b-modal.modal-lg5>array_flip</b-col>
+                        <b-col  class="title" v-b-modal.modal-lg5>array_flip</b-col>
                         <b-modal id="modal-lg5" size="lg" title="array_flip">
                             <div class="ex">
                                 (PHP 4 >= 4.0.5, PHP 5, PHP 7, PHP 8)
@@ -122,8 +122,8 @@
                             </div>
                         </b-modal>
 
-                        <b-col v-b-modal.modal-lg4>array_unshift</b-col>
-                        <b-modal id="modal-lg4" size="lg" title="array_unshift">
+                        <b-col class="title" v-b-modal.modal-lg6>array_unshift</b-col>
+                        <b-modal id="modal-lg6" size="lg" title="array_unshift">
                             <div class="ex">
                                 (PHP 4, PHP 5, PHP 7, PHP 8)
                                 array_unshift — 一つ以上の要素を配列の最初に加える
@@ -153,7 +153,7 @@
             <div class="string_func">
                 <li>文字列関数
                     <b-row cols="5">
-                        <b-col v-b-modal.modal-lg-string>implode</b-col>
+                        <b-col  class="title" v-b-modal.modal-lg-string>implode</b-col>
                         <b-modal id="modal-lg-string" size="lg" title="implode">
                             <div class="ex">
                                 (PHP 4, PHP 5, PHP 7, PHP 8)
@@ -166,7 +166,7 @@
                             </div>
                         </b-modal>
 
-                        <b-col v-b-modal.modal-lg-string2>explode</b-col>
+                        <b-col  class="title" v-b-modal.modal-lg-string2>explode</b-col>
                         <b-modal id="modal-lg-string2" size="lg" title="explode">
                             <div class="ex">
                                 (PHP 4, PHP 5, PHP 7, PHP 8)
@@ -180,7 +180,7 @@
                             </div>
                         </b-modal>
 
-                        <b-col v-b-modal.modal-lg-string3>number_format</b-col>
+                        <b-col  class="title" v-b-modal.modal-lg-string3>number_format</b-col>
                         <b-modal id="modal-lg-string3" size="lg" title="number_format">
                             <div class="ex">
                                 (PHP 4, PHP 5, PHP 7, PHP 8)
@@ -198,11 +198,11 @@
                 </li>
             </div>
 
-            <div>
+            <div class="math_func">
                 <li>数学関数
                     <b-row cols="5">
 
-                        <b-col v-b-modal.modal-lg-math>floor</b-col>
+                        <b-col  class="title" v-b-modal.modal-lg-math>floor</b-col>
                         <b-modal id="modal-lg-math" size="lg" title="floor">
                             <div class="ex">
                                 (PHP 4, PHP 5, PHP 7, PHP 8)
@@ -215,7 +215,7 @@
                             </div>
                         </b-modal>
 
-                        <b-col v-b-modal.modal-lg-math2>abs</b-col>
+                        <b-col  class="title" v-b-modal.modal-lg-math2>abs</b-col>
                         <b-modal id="modal-lg-math2" size="lg" title="abs">
                             <div class="ex">
                                 (PHP 4, PHP 5, PHP 7, PHP 8)
@@ -230,6 +230,27 @@
                     </b-row>
                 </li>
             </div>
+
+            <div class="filesystem_func">
+                <li>ファイルシステム関数
+                    <b-row cols="5">
+
+                        <b-col  class="title" v-b-modal.modal-lg-file>file_get_contents</b-col>
+                        <b-modal id="modal-lg-file" size="lg" title="file_get_contents">
+                            <div class="ex">
+                                (PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+                                file_get_contents — ファイルの内容を全て文字列に読み込む
+                            </div>
+                            <div class="text-h2 pa-12 code">
+                                <p>$homepage = file_get_contents('http://www.example.com/');</p>
+                                <p>echo $homepage;</p>
+                            </div>
+                        </b-modal>
+
+                    </b-row>
+                </li>
+            </div>
+
         </div>
     
 </template>
@@ -255,7 +276,10 @@ p{
     padding: 10px;
     margin-left: 20px;
 }
-.array_func,.string_func{
+.array_func,.string_func,.math_func,.filesystem_func{
     margin-bottom: 20px;
+}
+.title{
+    margin-top: 10px;
 }
 </style>

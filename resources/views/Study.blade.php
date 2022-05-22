@@ -10,4 +10,34 @@
 <p>1234</p>
 <p>数字のフォーマット：<?php echo number_format(1234) ?>
 </p>
+<?php
+$tree = simplexml_load_file(storage_path('app/public/sample.xml'));
+$parent = $tree;
+
+foreach ($tree -> Address as $a) {
+    echo $a -> Name."\n";
+    echo $a -> Street."\n";
+    echo $a -> City."</br>";
+}
+//print_r($tree->Address);
+//print_r($parent);
+//echo $parent;
+?>
+</br>
+<?php
+$tree_json = file_get_contents(storage_path('app/public/sample.json'));
+$json = json_decode($tree_json);
+
+foreach ($json -> menu -> popup -> menuitem as $items) {
+    echo "<h1>".$items -> value."\n";
+    echo $items -> onclick."</br>"."</h1>";
+}
+echo "</br>";
+$tree_xml = simplexml_load_file(storage_path('app/public/sample2.xml'));
+
+foreach ($tree_xml -> popup -> menuitem as $xml_items) {
+    echo($xml_items -> attributes() -> value."\n");
+    echo $xml_items -> attributes() -> onclick."</br>";
+};
+?>
 @endsection
