@@ -3,7 +3,7 @@
         <b-container fluid class="p-2">
             <b-row>
             <b-col cols = '3' v-for= "photo in photos" :key="photo.id">
-            <b-img thumbnail fluid :src="'https://localhost/sample_app/public/'+photo.path" v-b-modal.modal-scoped @click="openModal(photo)"></b-img>
+            <b-img thumbnail fluid :src="'http://localhost:8000/'+photo.path" v-b-modal.modal-scoped @click="openModal(photo)"></b-img>
             </b-col>
             <b-modal id="modal-scoped" title="画像詳細" size="lg">
                 <div v-show="!loading">
@@ -13,7 +13,7 @@
                 <b-container fluid>
                     <b-row>
                     <b-col cols = '6'>
-                    <b-img thumbnail fluid :src="'https://localhost/sample_app/public/'+this.image_path"></b-img>
+                    <b-img thumbnail fluid :src="'http://localhost:8000/'+this.image_path"></b-img>
                     </b-col>
                     <b-col cols = '6'>
                     <b-form-group
