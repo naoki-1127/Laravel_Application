@@ -31,6 +31,9 @@
                 <div v-if="key==='3'">
                     <git-index/>
                 </div>
+                <div v-if="key==='4'">
+                    <js-index/>
+                </div>
             </b-col>
             
         </b-row>
@@ -42,6 +45,7 @@
     import goIndex from "./go_index.vue"
     import gitIndex from "./git_index.vue"
     import vuejsIndex from  "./vuejs.index.vue"
+    import jsIndex from "./javascript_index.vue"
 
   export default {
       components: {
@@ -49,6 +53,7 @@
           goIndex,
           gitIndex,
           vuejsIndex,
+          jsIndex   
       },
       name: 'list',
       data: function(){
@@ -59,6 +64,7 @@
           { id: '1', text: 'Go', icon: ['fab', 'golang'] },
           { id: '2', text: 'Vuejs', icon: ['fab', 'vuejs'] },
           { id: '3', text: 'Git', icon:  ['fab', 'git']},
+          { id: '4', text: 'Javascript', icon:  ['fab', 'git']},
           ],
           test:"test",
           key:'0',
