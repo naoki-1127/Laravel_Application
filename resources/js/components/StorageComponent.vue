@@ -119,7 +119,7 @@ ul,li{
         },
         data: function() {
             return{
-                url_edit_id: 'https://localhost/sample_app/public/box/redirect',
+                url_edit_id: 'http://localhost:8000/box/redirect',
                 folder_id: null,
                 menu_name: "#menu",
                 show: {},

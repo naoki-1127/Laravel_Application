@@ -16,7 +16,7 @@ return [
     'au_client_secret' 	=> '',
     'su_client_id'         => 'udmex0mltu47e7lo20tpnueguevqzmj2',
     'su_client_secret'     => 'O3yTRbKzbeoefmpBefqHnoLvPDP1Ub1F',
-    'redirect_uri'  	=> 'https://localhost/sample_app/public/callbackdone',
+    'redirect_uri'  	=> 'http://localhost:8000/callbackdone',
 
     /*
     |--------------------------------------------------------------------------

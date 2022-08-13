@@ -33,12 +33,12 @@ return $settings = array(
 
         // Usually x509cert and privateKey of the SP are provided by files placed at
         // the certs folder. But we can also provide them with the following parameters
-        'x509cert' => env('SAML2_'.$this_idp_env_id.'_SP_x509',''),
-        'privateKey' => env('SAML2_'.$this_idp_env_id.'_SP_PRIVATEKEY',''),
+        'x509cert' => env('SAML2_'.$this_idp_env_id.'_SP_x509', ''),
+        'privateKey' => env('SAML2_'.$this_idp_env_id.'_SP_PRIVATEKEY', ''),
 
         // Identifier (URI) of the SP entity.
         // Leave blank to use the '{idpName}_metadata' route, e.g. 'test_metadata'.
-        'entityId' => 'https://localhost/sample_app/public/saml2/trastlogin/metadata',
+        'entityId' => 'http://localhost:8000/saml2/trastlogin/metadata',
 
         // Specifies info about where and how the <AuthnResponse> message MUST be
         // returned to the requester, in this case our SP.
@@ -46,7 +46,7 @@ return $settings = array(
             // URL Location where the <Response> from the IdP will be returned,
             // using HTTP-POST binding.
             // Leave blank to use the '{idpName}_acs' route, e.g. 'test_acs'
-            'url' => 'https://localhost/sample_app/public/saml2/trastlogin/acs',
+            'url' => 'http://localhost:8000/saml2/trastlogin/acs',
         ),
         // Specifies info about where and how the <Logout Response> message MUST be
         // returned to the requester, in this case our SP.
