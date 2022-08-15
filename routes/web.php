@@ -43,6 +43,9 @@ Route::get('/study', function () {
 Route::get('/dictionary', function () {
     return view('dictionary');
 });
+Route::get('/news', function () {
+    return view('news');
+});
 Route::get('/storageapi', function () {
     $data = Session::all();
     $folders[]['folder_name'] = 'none';
@@ -70,6 +73,7 @@ Route::prefix('/api')->group(function () {
         route::post('/{id}', 'PhotoAlbumController@update');
     });
     Route::post('/getpreview', 'StorageController@getpreview');
+    Route::get('/news', 'NewsController@index');
 });
 
 Route::get('/box/redirect', 'StorageController@boxredirect')->name('box_redirect');

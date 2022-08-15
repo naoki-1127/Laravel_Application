@@ -60,7 +60,7 @@
             this.get_photo()
             console.log('Component mounted.')
         },
-        data:　function() {
+        data: function() {
             return {
                 file1: null,
                 uploadFile: '',
@@ -105,6 +105,7 @@
                     console.log(error)
                     this.message　=　'アップロードに失敗しました！'
                 });
+                location.reload()
                 this.$refs['my-modal'].toggle('#toggle-btn')
                 console.log(this.uploadFile);
                 console.log(formData);

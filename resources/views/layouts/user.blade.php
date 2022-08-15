@@ -10,7 +10,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="generator" content="Jekyll v4.0.1">
 	<title>山本のサイト</title>
-
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('/favicon.ico') }}">
 	<link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
 
 	<!-- Scripts -->
@@ -123,6 +123,12 @@
 								<a class="nav-link" href=<?php $url=env('APP_URL')?>./study>
 									<span data-feather="pen-tool"></span>
 									Study
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href=<?php $url=env('APP_URL')?>./news>
+									<span data-feather="pen-tool"></span>
+									News
 								</a>
 							</li>
 						</ul>

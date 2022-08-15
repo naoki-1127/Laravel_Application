@@ -59,7 +59,7 @@ export default {
         list,
         headerItem
     },
-    methods:{
+    methods: {
         getkey(key){
             this.key = key,
             console.log(this.key)
