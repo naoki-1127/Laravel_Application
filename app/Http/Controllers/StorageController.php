@@ -14,8 +14,8 @@ class StorageController extends Controller
 {
     public function boxredirect(Request $request)
     {
-        $box_client_id = env('BOX_ClientID');
-        $box_redirectURI = env('BOX_RedirectURI');
+        $box_client_id = config('myconnect.box.clientid');
+        $box_redirectURI = config('myconnect.box.redirect_uri');
         Log::debug('ボックス：'.$box_client_id);
         Log::debug('ボックス：'.$box_redirectURI);
 
@@ -32,10 +32,11 @@ class StorageController extends Controller
     public function boxcallback(Request $request)
     {
         $state = $request->session()->pull('state');
+        Log::debug(config('myconnect.box.client_secret'));
         $provider = new Box([
-            'clientId' => 'udmex0mltu47e7lo20tpnueguevqzmj2',
-            'clientSecret' => 'O3yTRbKzbeoefmpBefqHnoLvPDP1Ub1F',
-            'redirectUri' => 'http://localhost:8000/callback',
+            'clientId' => config('myconnect.box.clientid'),
+            'clientSecret' => config('myconnect.box.client_secret'),
+            'redirectUri' => config('myconnect.box.redirect_uri'),
         ]);
         Log::debug($request->all());
         if (!$request->input('code')) {

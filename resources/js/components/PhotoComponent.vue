@@ -22,7 +22,7 @@
                         </div>
                         <b-button class="mt-3" variant="outline-secondary" block @click="hideModal">Close</b-button>
                         <b-button class="mt-2" variant="outline-success" block @click="upload">Upload</b-button>
-                        <!-- <b-button class="mt-2" variant="outline-primary" block @click="upload_from_box">Upload from Box</b-button> -->
+                        <b-button class="mt-2" variant="outline-primary" block @click="upload_from_box">Upload from Box</b-button>
                     </b-modal>
                 </div>
                 <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">

@@ -24,22 +24,23 @@ class NewsController extends Controller
                 'Authorization' => 'Bearer '.config("myconnect.qiita.accesstoken"),
             ],
             'query' => [
-                'query' => 'Laravel9',
-                'per_page' => 20,
+                'query' => 'mongoDB',
+                'per_page' => 100,
             ]
         ];
+        
         $responce = $client->request("GET", 'items', $options);
         $responceBody = $responce->getBody()->getContents();
-        Log::debug("unko");
-        //Log::debug($responceBody);
+
         $json_responceBody = json_decode($responceBody);
-        Log::debug(count($json_responceBody));
+        
         for($i=0;$i<count($json_responceBody);$i++){
             $news_info[$i]['title'] =  $json_responceBody[$i]->title;
             $news_info[$i]['url'] =  $json_responceBody[$i]->url;
         }
-        Log::debug($news_info);
+        
         return json_encode($news_info);
+        
     }
 
     /**
