@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Stevenmaguire\OAuth2\Client\Provider\Box;
 use GuzzleHttp\Client;
-use App\Utils\BoxUtil;
 
 class StorageController extends Controller
 {
@@ -63,21 +62,16 @@ class StorageController extends Controller
                 // We got an access token, let's now get the user's details
                 $user = $provider->getResourceOwner($token);
                 Log::debug($user->getId());
-        
-                // Use these details to create a new profile
-                printf('Hello %s!', $user->getId());
             } catch (Exception $e) {
         
                 // Failed to get user details
                 exit('Oh dear...');
             }
         
-            // Use this to interact with an API on the users behalf
-            echo $token->getToken();
             Session::put(['accesstoken' => $token->getToken()]);
 
-            $client = new Client(['base_uri' => 'https://api.box.com/2.0/folders/']);
-            $path = '0/';
+            $client = new Client(['base_uri' => config('myconnect.box.base_uri')]);
+            $path = 'folders/0/';
             $options = [
                 'headers' => [
                     'Authorization' => 'Bearer '.$token,
@@ -105,8 +99,8 @@ class StorageController extends Controller
             $count = $responce_data['item_collection'];
 
             for ($x=0;$x<$count;$x++) {
-                $client = new Client(['base_uri' => 'https://api.box.com/2.0/folders/']);
-                $path = $folders[$x]['folder_id'].'/items';
+                $client = new Client(['base_uri' => config('myconnect.box.base_uri')]);
+                $path = 'folders/'.$folders[$x]['folder_id'].'/items';
                 $options = [
                     'headers' => [
                         'Authorization' => 'Bearer '.$token,
@@ -115,7 +109,7 @@ class StorageController extends Controller
                 ];
                 $responce = $client->request('GET', $path, $options);
                 $responceBody = $responce->getBody()->getContents();
-                /* Log::debug('2回目'.$responceBody); */
+                
                 $json_responceBody = json_decode($responceBody);
                 $responce_data = array(
                     'total_count' => $json_responceBody->total_count,
@@ -144,8 +138,8 @@ class StorageController extends Controller
                     
                     if ($responce_data['total_count']>100) {
                         $responce_data['total_count'] = $responce_data['total_count']-100;
-                        $client = new Client(['base_uri' => 'https://api.box.com/2.0/folders/']);
-                        $path = $folders[$x]['folder_id'].'/items/?offset=100';
+                        $client = new Client(['base_uri' => config('myconnect.box.base_uri')]);
+                        $path = 'folders/'.$folders[$x]['folder_id'].'/items/?offset=100';
                         $options = [
                             'headers' => [
                                 'Authorization' => 'Bearer '.$token,
@@ -191,8 +185,8 @@ class StorageController extends Controller
             Log::info('アクセストークン取得');
             return redirect('box/redirect');
         }
-        $client = new Client(['base_uri' => 'https://api.box.com/2.0/files/']);
-        $path = $file_id.'/content';
+        $client = new Client(['base_uri' => config('myconnect.box.base_uri')]);
+        $path = 'files/'.$file_id.'/content';
         $options = [
             'headers' => [
                 'Authorization' => 'Bearer '.$accesstoken,
@@ -215,6 +209,5 @@ class StorageController extends Controller
         }
 
         return $img;
-        /* return $responceBody; */
     }
 }
