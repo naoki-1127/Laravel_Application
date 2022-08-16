@@ -68,7 +68,7 @@
             <li class="nav-item dropdown"> -->
 			<a id="navbarDropdown" class="nav-link dropdown-toggle login-user" href="#" role="button"
 				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-				<!-- {{ Auth::user()->name }} <span class="caret"></span> -->
+				
 				{{ Session::get('name') }} <span class="caret"></span>
 			</a>
 			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -127,7 +127,7 @@
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href=<?php $url=env('APP_URL')?>./news>
-									<span data-feather="pen-tool"></span>
+									<span data-feather="tablet"></span>
 									News
 								</a>
 							</li>

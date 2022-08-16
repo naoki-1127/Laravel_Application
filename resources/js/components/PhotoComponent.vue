@@ -98,12 +98,12 @@
                 axios
                 .post('api/fileupload',formData).then(response =>{
                     console.log(response)
-                    this.message　=　'アップロードに成功しました！'
+                    this.message = 'アップロードに成功しました！'
                 })
                 .catch(function(error) {
                     // error 処理
                     console.log(error)
-                    this.message　=　'アップロードに失敗しました！'
+                    this.message = 'アップロードに失敗しました！'
                 });
                 location.reload()
                 this.$refs['my-modal'].toggle('#toggle-btn')

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\News;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class NewsController extends Controller
 {
@@ -15,32 +18,20 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news_info = [];
-        $client = new Client([
-            'base_uri' => config("myconnect.qiita.base_uri")
-        ]);
-        $options = [
-            'headers' => [
-                'Authorization' => 'Bearer '.config("myconnect.qiita.accesstoken"),
-            ],
-            'query' => [
-                'query' => 'mongoDB',
-                'per_page' => 100,
-            ]
-        ];
-        
-        $responce = $client->request("GET", 'items', $options);
-        $responceBody = $responce->getBody()->getContents();
-
-        $json_responceBody = json_decode($responceBody);
-        
-        for($i=0;$i<count($json_responceBody);$i++){
-            $news_info[$i]['title'] =  $json_responceBody[$i]->title;
-            $news_info[$i]['url'] =  $json_responceBody[$i]->url;
+        $i=0;
+        $index_word = [];
+        $index_words = [];
+        $user_id = Session::get('user_id');
+        $datas = DB::table('news')->where('user_id', $user_id)->limit(5)->get();
+        foreach ($datas as $data) {
+            $index_word['id'] = $i;
+            $index_word['index_word'] = $data->index_word;
+            array_push($index_words,$index_word);
+            $index_word = [];
+            $i++;
         }
         
-        return json_encode($news_info);
-        
+        return view('news')->with('index_words',$index_words);
     }
 
     /**
@@ -61,7 +52,12 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user_id = Session::get('user_id');
+        $newItem = new News;
+        $newItem->user_id = $user_id;
+        $newItem->index_word = $request->item['name'];
+        $newItem->save();
+        return $newItem;
     }
 
     /**
@@ -107,5 +103,42 @@ class NewsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function news_list(Request $request)
+    {
+        $index = $request->index_word;
+        
+        $news_info = [];
+        $client = new Client([
+            'base_uri' => config("myconnect.qiita.base_uri")
+        ]);
+        $options = [
+            'headers' => [
+                'Authorization' => 'Bearer '.config("myconnect.qiita.accesstoken"),
+            ],
+            'query' => [
+                'query' => $index,
+                'per_page' => 100,
+            ]
+        ];
+        
+        $responce = $client->request("GET", 'items', $options);
+        $responceBody = $responce->getBody()->getContents();
+
+        $json_responceBody = json_decode($responceBody);
+        
+        for($i=0;$i<count($json_responceBody);$i++){
+            $news_info[$i]['title'] =  $json_responceBody[$i]->title;
+            $news_info[$i]['url'] =  $json_responceBody[$i]->url;
+        }
+        
+        return json_encode($news_info);
     }
 }

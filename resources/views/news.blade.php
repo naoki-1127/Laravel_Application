@@ -1,4 +1,4 @@
 @extends('layouts.user')
 @section('content')
-<news-component></news-component>
+<news-component :index_words='@json($index_words)'></news-component>
 @endsection

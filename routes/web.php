@@ -43,9 +43,7 @@ Route::get('/study', function () {
 Route::get('/dictionary', function () {
     return view('dictionary');
 });
-Route::get('/news', function () {
-    return view('news');
-});
+Route::get('/news', 'NewsController@index');
 Route::get('/storageapi', function () {
     $data = Session::all();
     $folders[]['folder_name'] = 'none';
@@ -54,6 +52,8 @@ Route::get('/storageapi', function () {
         'folders' => json_encode($folders),
     ]);
 });
+
+
 Route::prefix('/api')->group(function () {
     Route::post('/uploadtobox', 'StudyController@upload_box');
     Route::post('/fileupload', 'PhotoAlbumController@store');
@@ -73,7 +73,8 @@ Route::prefix('/api')->group(function () {
         route::post('/{id}', 'PhotoAlbumController@update');
     });
     Route::post('/getpreview', 'StorageController@getpreview');
-    Route::get('/news', 'NewsController@index');
+    Route::get('/news', 'NewsController@news_list');
+    Route::post('/news/store', 'NewsController@store');
 });
 
 Route::get('/box/redirect', 'StorageController@boxredirect')->name('box_redirect');

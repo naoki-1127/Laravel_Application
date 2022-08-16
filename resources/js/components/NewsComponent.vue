@@ -9,30 +9,30 @@
                 検索語句
             </template>
             <div class="add-search-index">
-                <font-awesome-icon icon='plus-circle'/>
+                
+                <div class ="addItem">
+
+                <input type="text" v-model="item.name" />
+                <font-awesome-icon 
+                    icon='plus-circle'
+                    @click="addItem()"
+                    :class="[ item.name && this.index_words_count < 5 ? 'active' : 'inactive','plus']"
+                />
+                <div v-show="this.index_words_count>=5" class="notice">
+                    登録できる単語は5つまでです
+                </div>
+                </div>
+                
             </div>
             
             <b-list-group>
-                <b-list-group-item>Laravel9</b-list-group-item>
-                <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
-                <b-list-group-item>Morbi leo risus</b-list-group-item>
-                <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
-                <b-list-group-item>Vestibulum at eros</b-list-group-item>
+                <b-list-group-item v-for="index_word in index_words" :key="index_word.id">{{index_word.index_word}}</b-list-group-item>
             </b-list-group>
         </b-modal>
 
         <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Laravel9</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+            <li v-for="index_word in index_words" :key="index_word.id" class="nav-item">
+                <a @click="isSelect(index_word)" class="nav-link" :class="{ active : isActive==index_word.id}">{{index_word.index_word}}</a>
             </li>
         </ul>
 
@@ -59,22 +59,31 @@
         components: {
             headerItem
         },
-        props: ['users'],
-        mounted() {
-            console.log('Component mounted.')
-            this.getnews()
-        },
+        props: ['users','index_words'],
         data: function() {
             return{
                 name: "News",
                 news: [],
-                loading: true
+                selected_index_word: "Laravel9",
+                index_words_count: 0,
+                loading: true,
+                isActive: 0,
+                item:{
+                    name: ""
+                }
             }
+        },
+        mounted() {
+            this.index_words_count = this.index_words.length
+            this.getnews()
         },
         methods: {
             getnews: function(){
-                console.log('getnews')
-                axios.get('api/news')
+                axios.get('api/news',{
+                    params: {
+                        index_word: this.selected_index_word,
+                    }
+                })
                 .then(responce=>(
                     this.news = responce.data,
                     console.log(this.news),
@@ -84,8 +93,33 @@
                     console.log(error),
                     this.loading = false
                 })
-            }
-
+            },
+            isSelect: function (data) {
+                this.loading = true,
+                console.log(data.id+data.index_word),
+                this.isActive = data.id,
+                this.selected_index_word = data.index_word,
+                this.getnews();
+            },
+            addItem: function (){
+                if( this.item.name == '' ){
+                    return;
+                }else if(this.index_words_count >= 5){
+                    return;
+                }
+                axios.post('api/news/store',{
+                    item: this.item,
+                })
+                .then( response => {
+                    if(response.status == 201){
+                        this.item.name = '';
+                    }
+                })
+                .catch( error => {
+                    console.log( error );
+                })
+                location.reload()
+            },
         }
     }
 </script>
@@ -104,5 +138,19 @@ li{
 }
 .loading{
     padding-bottom: 40px;
+}
+.plus{
+    font-size: 20px;
+}
+.active{
+    color: #00ce25;
+}
+.inactive{
+    color: #999999;
+}
+.notice{
+    color: red;
+    font-size: 12px;
+    padding-top: 3px;
 }
 </style>

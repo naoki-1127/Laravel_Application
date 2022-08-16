@@ -3,23 +3,8 @@
         <header-item :name="name"></header-item>
         <div>
             <div>
-                <!-- <list @test="getkey"/> -->
                 <list/>
             </div>
-            <!-- <div>
-                <div v-if="key==='0'">
-                    <php-index/>
-                </div>
-                <div v-if="key==='1'">
-                    <go-index/>
-                </div>
-                <div v-if="key==='2'">
-                    <vuejs-index/>
-                </div>
-                <div v-if="key==='3'">
-                    <git-index/>
-                </div>
-            </div> -->
         </div>
     </div>
 </template>
