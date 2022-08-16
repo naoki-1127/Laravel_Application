@@ -18,6 +18,12 @@ class NewsController extends Controller
      */
     public function index()
     {
+        $user_id = Session::get('user_id');
+
+        if(!$user_id){
+            return redirect('login');
+        }
+
         $i=0;
         $index_word = [];
         $index_words = [];
@@ -113,9 +119,12 @@ class NewsController extends Controller
      */
     public function news_list(Request $request)
     {
+        Log::debug("news_list API CALL START");
         $index = $request->index_word;
         
         $news_info = [];
+
+        Log::debug("Get news_list from Qiita API CALL START");
         $client = new Client([
             'base_uri' => config("myconnect.qiita.base_uri")
         ]);
@@ -134,11 +143,46 @@ class NewsController extends Controller
 
         $json_responceBody = json_decode($responceBody);
         
+        Log::debug("Get news_list from Qiita API CALL END");
+
         for($i=0;$i<count($json_responceBody);$i++){
             $news_info[$i]['title'] =  $json_responceBody[$i]->title;
             $news_info[$i]['url'] =  $json_responceBody[$i]->url;
         }
         
+        Log::debug("news_list API CALL END");
+        return json_encode($news_info);
+    }
+
+    public function stock_news_list()
+    {
+        Log::debug("stock_news_list API CALL START");
+        $news_info = [];
+
+        Log::debug("Get stock_news_list from Qiita API CALL START");
+        $client = new Client([
+            'base_uri' => config("myconnect.qiita.base_uri")
+        ]);
+        $options = [
+            'headers' => [
+                'Authorization' => 'Bearer '.config("myconnect.qiita.accesstoken"),
+            ],
+            'query' => [
+                'per_page' => 100,
+            ]
+        ];
+
+        $responce = $client->request("GET", 'users/'.config("myconnect.qiita.myaccount").'/stocks', $options);
+        $responceBody = $responce->getBody()->getContents();
+
+        $json_responceBody = json_decode($responceBody);
+        Log::debug("Get stock_news_list from Qiita API CALL END");
+
+        for($i=0;$i<count($json_responceBody);$i++){
+            $news_info[$i]['title'] =  $json_responceBody[$i]->title;
+            $news_info[$i]['url'] =  $json_responceBody[$i]->url;
+        }
+        Log::debug("stock_news_list API CALL END");
         return json_encode($news_info);
     }
 }

@@ -5,6 +5,7 @@ return [
     'qiita' => [
         'base_uri' => env('QIITA_BASEURI', ''),
         'accesstoken' => env('QIITA_ACCESSTOKEN', ''),
+        'myaccount' =>env('QIITA_MY_ACCOUNT', '')
     ],
     'box' => [
         'base_uri' => env('BOX_BASEURI', ''),

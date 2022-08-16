@@ -34,6 +34,9 @@
             <li v-for="index_word in index_words" :key="index_word.id" class="nav-item">
                 <a @click="isSelect(index_word)" class="nav-link" :class="{ active : isActive==index_word.id}">{{index_word.index_word}}</a>
             </li>
+            <li class="nav-item">
+                <a @click="isSelect2(index_words_count)" class="nav-link" :class="{ active : isActive==index_words_count}">ストック記事</a>
+            </li>
         </ul>
 
         <div v-show="loading" class="loading">
@@ -94,12 +97,30 @@
                     this.loading = false
                 })
             },
+            getstocknews: function(){
+                axios.get('api/news/stock')
+                .then(responce=>(
+                    this.news = responce.data,
+                    console.log(this.news),
+                    this.loading = false
+                ))
+                .catch((error)=> {
+                    console.log(error),
+                    this.loading = false
+                })
+            },
             isSelect: function (data) {
                 this.loading = true,
                 console.log(data.id+data.index_word),
                 this.isActive = data.id,
                 this.selected_index_word = data.index_word,
                 this.getnews();
+            },
+            isSelect2: function (num) {
+                this.loading = true,
+                console.log(num),
+                this.isActive = num,
+                this.getstocknews();
             },
             addItem: function (){
                 if( this.item.name == '' ){

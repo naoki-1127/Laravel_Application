@@ -36,7 +36,7 @@ export default{
     },
     methods: {
         getList(){
-            axios.get('api/items')
+            axios.get('api/item')
             .then(response=>{
                 this.items =response.data
                 console.log(this.item);
