@@ -26,7 +26,11 @@
             </div>
             
             <b-list-group>
-                <b-list-group-item v-for="index_word in index_words" :key="index_word.id">{{index_word.index_word}}</b-list-group-item>
+                <b-list-group-item v-for="index_word in index_words" :key="index_word.id" class="item">{{index_word.index_word}}
+                    <button @click="removeItem(index_word.pid)" class="trashcan" >
+                        <font-awesome-icon icon='trash' />
+                    </button> 
+                </b-list-group-item>
             </b-list-group>
         </b-modal>
 
@@ -141,6 +145,19 @@
                 })
                 location.reload()
             },
+            removeItem(num) {
+                console.log(num);
+                axios.delete('api/news/' + num)
+                .then( response => {
+                    if( response.status == 200) {
+                    this.$emit('itemchanged');
+                    location.reload
+                    }
+                })
+                .catch( error => {
+                    console.log( error );
+                })
+            }
         }
     }
 </script>
@@ -173,5 +190,12 @@ li{
     color: red;
     font-size: 12px;
     padding-top: 3px;
+}
+.trashcan {
+    background-color: white;
+    float: right;
+    border: none;
+    color: #f00;
+    outline: none;
 }
 </style>

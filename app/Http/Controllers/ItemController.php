@@ -15,7 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return Todo_item::Item()->Orderby('created_at','DESC')->get();
+        return view('todo');
     }
 
     /**
@@ -102,5 +102,15 @@ class ItemController extends Controller
             $existingItem->save();
             return "Item successfully deleted.";
         }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function itemlist()
+    {
+        return Todo_item::Item()->Orderby('created_at','DESC')->get();
     }
 }

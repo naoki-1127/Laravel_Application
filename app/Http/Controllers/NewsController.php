@@ -31,6 +31,7 @@ class NewsController extends Controller
         $datas = DB::table('news')->where('user_id', $user_id)->limit(5)->get();
         foreach ($datas as $data) {
             $index_word['id'] = $i;
+            $index_word['pid'] = $data->id;
             $index_word['index_word'] = $data->index_word;
             array_push($index_words,$index_word);
             $index_word = [];
@@ -108,7 +109,10 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Log::debug("destroy API CALL START");
+        Log::debug($id);
+        News::destroy($id);
+        return "success";
     }
 
     /**

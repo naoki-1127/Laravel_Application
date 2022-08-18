@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
@@ -30,27 +31,24 @@ Route::middleware(['samlauth'])->group(function () {
     Route::get('/home', 'HomeController@index');
 });
 
-Route::get('/todo', function () {
-    return view('todo');
-});
-Route::get('/photo', function () {
-    return view('photo');
-});
-Route::get('/study', function () {
-    return view('study');
-});
-Route::get('/dictionary', function () {
-    return view('dictionary');
-});
-Route::get('/news', 'NewsController@index');
-
-Route::get('/storageapi', function () {
-    $data = Session::all();
-    $folders[]['folder_name'] = 'none';
-    Log::debug($data, ['file' => __FILE__, 'line' => __LINE__]);
-    return view('storage')->with([
-        'folders' => json_encode($folders),
-    ]);
+Route::middleware(['session'])->group(function () {
+    Route::get('/todo', 'ItemController@index');
+    Route::get('/photo', function () {
+        return view('photo');
+    });
+    Route::get('/study', function () {
+        return view('study');
+    });
+    Route::get('/dictionary', function () {
+        return view('dictionary');
+    });
+    Route::get('/news', 'NewsController@index');
+    Route::get('/storageapi', function () {
+        $folders[]['folder_name'] = 'none';
+        return view('storage')->with([
+            'folders' => json_encode($folders),
+        ]);
+    });
 });
 
 Route::prefix('/api')->group(function () {
@@ -61,7 +59,7 @@ Route::prefix('/api')->group(function () {
 
     
     Route::prefix('/item')->group(function () {
-        Route::get('/', 'ItemController@index');
+        Route::get('/', 'ItemController@itemlist');
         route::post('/store', 'ItemController@store');
         route::put('/{id}', 'ItemController@update');
         route::delete('/{id}', 'ItemController@destroy');
@@ -78,6 +76,7 @@ Route::prefix('/api')->group(function () {
         Route::get('/', 'NewsController@news_list');
         Route::post('/store', 'NewsController@store');
         Route::get('/stock', 'NewsController@stock_news_list');
+        Route::delete('/{id}', 'NewsController@destroy');
     });
 });
 
